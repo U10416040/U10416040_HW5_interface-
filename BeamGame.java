@@ -1,10 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package beamgame;
 
+package beamgame;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,10 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Eric
- */
+
 public class BeamGame extends Application {
     
     @Override
@@ -31,7 +23,7 @@ public class BeamGame extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+                System.out.println("BeanGame!");
             }
         });
                                 
@@ -46,13 +38,14 @@ public class BeamGame extends Application {
         primaryStage.show();
     }
     
-    class LinePane extends Pane{       
-        int pt[][]=new int[22][2];
+    //draw line and circle
+    class LinePane extends Pane{       	
+        int pt[][]=new int[22][2];//array for lines        
         int temp[]=new int[7];
-        int c1[][]=new int[7][7];
+        int c1[][]=new int[7][7];//arrary for circles
         Line line1;
         Circle C1;        
-        
+                
         public LinePane(){
             pt[0][0]=275;
             pt[0][1]=50;
@@ -120,6 +113,7 @@ public class BeamGame extends Application {
             pt[21][0]=510;
             pt[21][1]=680;
             
+            //draw lines
             int i;
             for(i=0;i<21;i++){
                 if((i>=7) && (i%2==1)){
@@ -160,6 +154,7 @@ public class BeamGame extends Application {
                 System.out.printf("%d\n", g);
             }              
             
+            //draw circles
             int m,n,py=580;
             for(m=0;m<7;m++){
                 for(n=0;n<7-m;n++){
@@ -167,12 +162,13 @@ public class BeamGame extends Application {
                     System.out.printf("x=%d y=%d ", c1[m][n], py);
                     
                 }
-                py=py-70;
+                py=py-70;//Y point 
                 System.out.printf("%d\n", m);
             }
             
         }
         
+        //set circle feature
         int drawcircle(int x, int y, int r){            
             C1=new Circle();           
             
