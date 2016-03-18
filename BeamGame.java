@@ -1,4 +1,9 @@
-//U10416040 ªL¦ö¼á
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package beamgame;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -8,10 +13,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.*;
 import javafx.stage.Stage;
-import javafx.scene.shape.Line;
 
-
+/**
+ *
+ * @author Eric
+ */
 public class BeamGame extends Application {
     
     @Override
@@ -38,9 +46,12 @@ public class BeamGame extends Application {
         primaryStage.show();
     }
     
-    class LinePane extends Pane{
+    class LinePane extends Pane{       
         int pt[][]=new int[22][2];
+        int temp[]=new int[7];
+        int c1[][]=new int[7][7];
         Line line1;
+        Circle C1;        
         
         public LinePane(){
             pt[0][0]=275;
@@ -118,14 +129,64 @@ public class BeamGame extends Application {
                 line1=new Line(pt[i][0], pt[i][1], pt[i+1][0], pt[i+1][1]);
                 line1.setStrokeWidth(5);
                 line1.setStroke(Color.GREEN);
-                getChildren().add(line1);
+                getChildren().add(line1);                                
+            }                            
+            
+            temp[0]=90;
+            temp[1]=160;
+            temp[2]=230;
+            temp[3]=300;
+            temp[4]=370;
+            temp[5]=440;
+            temp[6]=510;            
+            
+            c1[0][0]=temp[0];
+            c1[0][1]=temp[1];
+            c1[0][2]=temp[2];
+            c1[0][3]=temp[3];
+            c1[0][4]=temp[4];
+            c1[0][5]=temp[5];
+            c1[0][6]=temp[6];          
+           
+            
+            //create circle X point arrary
+            int g,j;
+            for(g=1;g<7;g++){                              
+                for(j=0;j<7-g;j++){                    
+                    c1[g][j]=(temp[j]+temp[j+1])/2;    
+                    temp[j]=c1[g][j];                    
+                    System.out.printf("%d ", temp[j]);
+                }                
+                System.out.printf("%d\n", g);
+            }              
+            
+            int m,n,py=580;
+            for(m=0;m<7;m++){
+                for(n=0;n<7-m;n++){
+                    drawcircle(c1[m][n], py, 10);
+                    System.out.printf("x=%d y=%d ", c1[m][n], py);
+                    
+                }
+                py=py-70;
+                System.out.printf("%d\n", m);
             }
             
-            
-            
         }
+        
+        int drawcircle(int x, int y, int r){            
+            C1=new Circle();           
+            
+            C1.setCenterX(x);
+            C1.setCenterY(y);
+            C1.setRadius(r);
+            C1.setStroke(Color.BLACK);
+            C1.setFill(Color.RED);                
+            getChildren().add(C1);                                
+            return 0;
+        }
+        
     }
-
+    
     /**
      * @param args the command line arguments
      */
